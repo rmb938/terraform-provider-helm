@@ -17,6 +17,7 @@ import (
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
+
 	// Import to initialize client auth plugins.
 	_ "k8s.io/client-go/plugin/pkg/client/auth"
 	"k8s.io/client-go/rest"
@@ -399,6 +400,7 @@ func (m *Meta) installTillerIfNeeded(d *schema.ResourceData) error {
 	o.ImageSpec = d.Get("tiller_image").(string)
 	o.ServiceAccount = d.Get("service_account").(string)
 	o.MaxHistory = d.Get("max_history").(int)
+	o.AutoMountServiceAccountToken = true
 
 	for _, rule := range d.Get("override").([]interface{}) {
 		o.Values = append(o.Values, rule.(string))
