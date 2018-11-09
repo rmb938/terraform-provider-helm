@@ -50,7 +50,7 @@ jobs:
       script:
         # needed till we fix the init in the provider
         - helm init --client-only
-        - make testacc
+        - travis_wait make testacc
 
 matrix:
   fast_finish: true
