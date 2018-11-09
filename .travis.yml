@@ -30,6 +30,8 @@ jobs:
       env:
         - CHANGE_MINIKUBE_NONE_USER=true
         - KUBERNETES_VERSION=v1.10.0
+      install:
+        - sudo apt-get update && sudo apt-get install -y coreutils
       before_script:
         - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubectl && \
             chmod +x kubectl && sudo mv kubectl /usr/local/bin/
