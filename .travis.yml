@@ -5,18 +5,14 @@ language: go
 go:
 - 1.10.4
 
-env:
-  - CHANGE_MINIKUBE_NONE_USER=true
-  - KUBERNETES_VERSION=v1.10.0
-
 stages:
-  - unittest
-  - acceptancetest
+  - Unit test
+  - Acceptance test
 
 jobs:
   include:
     - name: Unit test
-      stage: unittest
+      stage: Unit test
       install:
         # This script is used by the Travis build to install a cookie for
         # go.googlesource.com so rate limits are higher when using `go get` to fetch
@@ -29,8 +25,11 @@ jobs:
         - make vendor-status
         - make vet
         - make website-test
-    - name: acceptance test
-      stage: acceptancetest
+    - name: Acceptance test
+      stage: Acceptance test
+      env:
+        - CHANGE_MINIKUBE_NONE_USER=true
+        - KUBERNETES_VERSION=v1.10.0
       before_script:
         - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubectl && \
             chmod +x kubectl && sudo mv kubectl /usr/local/bin/
