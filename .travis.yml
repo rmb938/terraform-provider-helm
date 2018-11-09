@@ -32,6 +32,9 @@ jobs:
       env:
         - CHANGE_MINIKUBE_NONE_USER=true
         - KUBERNETES_VERSION=v1.10.0
+      install:
+        - sudo apt-get update
+        - sudo apt-get install -y socat
       before_script:
         - sudo mount --make-rshared /
         - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl
